@@ -1,2 +1,2 @@
 # style-to-dom
-Fast create dom by less or sass or css.
+Fast create dom by less or scss or css.
