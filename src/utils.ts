@@ -1,6 +1,7 @@
 import less from 'less'
 import sass from 'sass'
 import { readFileSync } from 'node:fs'
+import * as csstree from 'css-tree'
 export function getStyleFileType(fileName: string) {
   const nameArr = fileName.split('.')
   const suffix = nameArr.pop()
@@ -29,4 +30,8 @@ export function getScssCssCode(scssCode: string) {
 
 export function readFileCode(filePath: string) {
   return readFileSync(filePath, 'utf-8')
+}
+
+export function getCssTree(cssCode: string) {
+  return csstree.parse(cssCode)
 }
