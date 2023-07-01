@@ -1,5 +1,6 @@
 import less from 'less'
 import sass from 'sass'
+import { readFileSync } from 'node:fs'
 export function getStyleFileType(fileName: string) {
   const nameArr = fileName.split('.')
   const suffix = nameArr.pop()
@@ -16,7 +17,6 @@ export function getLessCssCode(lessCode: string): Promise<string> {
       if (error) {
         reject(error)
       } else {
-        console.log(output?.css)
         resolve(output?.css || '')
       }
     })
@@ -25,4 +25,8 @@ export function getLessCssCode(lessCode: string): Promise<string> {
 
 export function getScssCssCode(scssCode: string) {
   return sass.compileString(scssCode)
+}
+
+export function readFileCode(filePath: string) {
+  return readFileSync(filePath, 'utf-8')
 }
