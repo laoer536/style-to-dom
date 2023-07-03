@@ -60,7 +60,6 @@ export function getSelectorListFromCssTree(cssTree: AtrulePrelude) {
 }
 
 export function getDomTree(selectorList: string[][]) {
-  console.log(selectorList)
   const result: Record<string, Record<string, string> | NonNullable<unknown>> = {}
   for (const oneWholeSelector of selectorList) {
     let local = result
@@ -71,6 +70,44 @@ export function getDomTree(selectorList: string[][]) {
       local = temp
     }
   }
+  return result
+}
+
+export function getDomStr(domTree: ReturnType<typeof getDomTree>, domType: 'vue' | 'react' = 'react') {
+  console.dir(domTree)
+  const classAttribute = domType === 'vue' ? 'class' : 'className'
+  const getSelectorName = (selector: string) => {
+    return domType === 'vue'
+      ? selector.startsWith('.')
+        ? selector.slice(1)
+        : ''
+      : selector.startsWith('.')
+      ? `Style${selector}`
+      : ''
+  }
+  let result = ''
+  function createDomStr(selectorList: string[], lastObj: ReturnType<typeof getDomTree>, numberOfLevels: number) {
+    console.log('lastObj', lastObj)
+    if (selectorList.length === 0) {
+      return
+    }
+    for (const selector of selectorList) {
+      console.log(selector)
+      const domName = selector.startsWith('.') ? 'div' : selector
+      const selectorName = getSelectorName(selector)
+      // if (result) {
+      //   result = result.replace(
+      //     '##',
+      //     `<${domName} ${classAttribute}='${selectorName}'>${selectorName + numberOfLevels}##</${domName}>`
+      //   )
+      // } else {
+      //   result = `<${domName} ${classAttribute}='${selectorName}'>${selectorName + numberOfLevels}##</${domName}>`
+      // }
+      result += `<${domName} ${classAttribute}='${selectorName}'>${selectorName + numberOfLevels}##</${domName}>`
+      createDomStr(Object.keys(lastObj[selector]), lastObj[selector], numberOfLevels)
+    }
+  }
+  createDomStr(Object.keys(domTree), domTree, 0)
   console.log(result)
   return result
 }
