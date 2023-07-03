@@ -40,9 +40,9 @@ export function getCssTree(cssCode: string, options?: ParseOptions) {
   return csstree.parse(cssCode, options) as AtrulePrelude
 }
 
-export function getNeededInfoFromCssTree(cssCode: string) {
+export function getSelectorListFromCssTree(cssTree: AtrulePrelude) {
   const cssArrHasAll: string[][] = []
-  const info1Arr = getCssTree(cssCode).children.toArray() as AtrulePlain[]
+  const info1Arr = cssTree.children.toArray() as AtrulePlain[]
   for (const info1 of info1Arr) {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
@@ -57,4 +57,20 @@ export function getNeededInfoFromCssTree(cssCode: string) {
     }
   }
   return cssArrHasAll
+}
+
+export function getDomTree(selectorList: string[][]) {
+  console.log(selectorList)
+  const result: Record<string, Record<string, string> | NonNullable<unknown>> = {}
+  for (const oneWholeSelector of selectorList) {
+    let local = result
+    for (const selector of oneWholeSelector) {
+      let temp = local[selector]
+      temp ??= {}
+      local[selector] = temp
+      local = temp
+    }
+  }
+  console.log(result)
+  return result
 }
