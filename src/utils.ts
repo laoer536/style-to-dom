@@ -4,7 +4,7 @@ import { readFileSync } from 'node:fs'
 import * as csstree from 'css-tree'
 import type { ParseOptions } from 'css-tree'
 import type { AtrulePrelude } from 'css-tree'
-import { AtrulePlain, AtrulePreludePlain, ClassSelector, TypeSelector } from 'css-tree'
+import { AtrulePlain, AtrulePreludePlain, ClassSelector, string, TypeSelector } from 'css-tree'
 
 export function getStyleFileType(fileName: string) {
   const nameArr = fileName.split('.')
@@ -82,32 +82,24 @@ export function getDomStr(domTree: ReturnType<typeof getDomTree>, domType: 'vue'
         ? selector.slice(1)
         : ''
       : selector.startsWith('.')
-      ? `Style${selector}`
+      ? `{Style['${selector.slice(1)}']}`
       : ''
   }
-  let result = ''
-  function createDomStr(selectorList: string[], lastObj: ReturnType<typeof getDomTree>, numberOfLevels: number) {
-    console.log('lastObj', lastObj)
-    if (selectorList.length === 0) {
-      return
-    }
-    for (const selector of selectorList) {
-      console.log(selector)
-      const domName = selector.startsWith('.') ? 'div' : selector
-      const selectorName = getSelectorName(selector)
-      // if (result) {
-      //   result = result.replace(
-      //     '##',
-      //     `<${domName} ${classAttribute}='${selectorName}'>${selectorName + numberOfLevels}##</${domName}>`
-      //   )
-      // } else {
-      //   result = `<${domName} ${classAttribute}='${selectorName}'>${selectorName + numberOfLevels}##</${domName}>`
-      // }
-      result += `<${domName} ${classAttribute}='${selectorName}'>${selectorName + numberOfLevels}##</${domName}>`
-      createDomStr(Object.keys(lastObj[selector]), lastObj[selector], numberOfLevels)
+  function create(domTree: ReturnType<typeof getDomTree>, selector: string) {
+    const keys = Object.keys(domTree)
+    const domName = selector.startsWith('.') ? 'div' : selector
+    const selectorName = getSelectorName(selector)
+    if (keys.length === 0) {
+      return `<${domName} ${classAttribute}='${selectorName}'>##</${domName}>`
+    } else {
+      let result = `<${domName} ${classAttribute}='${selectorName}'>`
+      keys.forEach((key) => {
+        result += create(domTree[key], `${key}`)
+      })
+      result += `</${domName}>`
+      return result
     }
   }
-  createDomStr(Object.keys(domTree), domTree, 0)
-  console.log(result)
-  return result
+  console.log(create(domTree, '.root'))
+  // return create(domTree, 'root')
 }
