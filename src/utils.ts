@@ -99,7 +99,6 @@ export function getDomStr(domTree: ReturnType<typeof getDomTree>, domType: 'vue'
       return result
     }
   }
-  console.log(create(domTree, '.root'))
   // return create(domTree, 'root')
-  return
+  return create(domTree, '.root')
 }
