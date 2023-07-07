@@ -74,7 +74,6 @@ export function getDomTree(selectorList: string[][]) {
 }
 
 export function getDomStr(domTree: ReturnType<typeof getDomTree>, domType: 'vue' | 'react' = 'react') {
-  console.dir(domTree)
   const classAttribute = domType === 'vue' ? 'class' : 'className'
   const getSelectorName = (selector: string) => {
     return domType === 'vue'
@@ -93,8 +92,8 @@ export function getDomStr(domTree: ReturnType<typeof getDomTree>, domType: 'vue'
       return `<${domName} ${classAttribute}='${selectorName}'>##</${domName}>`
     } else {
       let result = `<${domName} ${classAttribute}='${selectorName}'>`
-      keys.forEach((key) => {
-        result += create(domTree[key], `${key}`)
+      keys.forEach((selector) => {
+        result += create(domTree[selector], `${selector}`)
       })
       result += `</${domName}>`
       return result
@@ -102,4 +101,5 @@ export function getDomStr(domTree: ReturnType<typeof getDomTree>, domType: 'vue'
   }
   console.log(create(domTree, '.root'))
   // return create(domTree, 'root')
+  return
 }
