@@ -56,6 +56,17 @@ export function getSelectorListFromCssTree(cssTree: AtrulePrelude) {
       )
     }
   }
+  // const dealedArr: string[][] = []
+  // for (const cssArr of cssArrHasAll) {
+  //   let lastCss = ''
+  //   const result: string = []
+  //   for (const css of cssArr) {
+  //     if (lastCss && css.startsWith(lastCss)) {
+  //     }
+  //     lastCss = css
+  //   }
+  // }
+  console.log('cssArrHasAll', cssArrHasAll)
   return cssArrHasAll
 }
 
@@ -70,6 +81,7 @@ export function getDomTree(selectorList: string[][]) {
       local = temp
     }
   }
+  console.dir('getDomTree', result)
   return result
 }
 
@@ -89,16 +101,17 @@ export function getDomStr(domTree: ReturnType<typeof getDomTree>, domType: 'vue'
     const domName = selector.startsWith('.') ? 'div' : selector
     const selectorName = getSelectorName(selector)
     if (keys.length === 0) {
-      return `<${domName} ${classAttribute}='${selectorName}'>##</${domName}>`
+      return `<${domName} ${classAttribute}=${selectorName || `'${domName}'`}>##</${domName}>`
     } else {
-      let result = `<${domName} ${classAttribute}='${selectorName}'>`
-      keys.forEach((selector) => {
+      let result = `<${domName} ${classAttribute}=${selectorName || `'${domName}'`}>`
+      for (const selector of keys) {
         result += create(domTree[selector], `${selector}`)
-      })
+      }
       result += `</${domName}>`
       return result
     }
   }
   // return create(domTree, 'root')
+  console.log(create(domTree, '.root'))
   return create(domTree, '.root')
 }
