@@ -56,18 +56,23 @@ export function getSelectorListFromCssTree(cssTree: AtrulePrelude) {
       )
     }
   }
-  // const dealedArr: string[][] = []
-  // for (const cssArr of cssArrHasAll) {
-  //   let lastCss = ''
-  //   const result: string = []
-  //   for (const css of cssArr) {
-  //     if (lastCss && css.startsWith(lastCss)) {
-  //     }
-  //     lastCss = css
-  //   }
-  // }
-  console.log('cssArrHasAll', cssArrHasAll)
-  return cssArrHasAll
+  const allLineArr: string[][] = []
+  for (const selectorArr of cssArrHasAll) {
+    const singleLineArr: string[] = []
+    let lastSelector = ''
+    for (const selector of selectorArr) {
+      if (lastSelector && selector.includes('self')) {
+        singleLineArr.pop()
+        singleLineArr.push(lastSelector + selector)
+      } else {
+        singleLineArr.push(selector)
+      }
+      lastSelector = selector
+    }
+    allLineArr.push(singleLineArr)
+  }
+  console.log('allLineArr', allLineArr)
+  return allLineArr
 }
 
 export function getDomTree(selectorList: string[][]) {
@@ -81,7 +86,6 @@ export function getDomTree(selectorList: string[][]) {
       local = temp
     }
   }
-  console.dir('getDomTree', result)
   return result
 }
 
@@ -96,10 +100,21 @@ export function getDomStr(domTree: ReturnType<typeof getDomTree>, domType: 'vue'
       ? `{Style['${selector.slice(1)}']}`
       : ''
   }
+  const getDomName = (selector: string) => {
+    if (selector.startsWith('.')) {
+      return 'div'
+    } else {
+      if (selector.includes('.self')) {
+        return selector.split('.self')[0]
+      } else {
+        return selector
+      }
+    }
+  }
   function create(domTree: ReturnType<typeof getDomTree>, selector: string) {
     const keys = Object.keys(domTree)
-    const domName = selector.startsWith('.') ? 'div' : selector
-    const selectorName = getSelectorName(selector)
+    const domName = getDomName(selector)
+    const selectorName = getSelectorName(selector.includes('.self') ? '.' + selector.split('.')[1] : selector)
     if (keys.length === 0) {
       return `<${domName} ${classAttribute}=${selectorName || `'${domName}'`}>##</${domName}>`
     } else {
@@ -111,7 +126,5 @@ export function getDomStr(domTree: ReturnType<typeof getDomTree>, domType: 'vue'
       return result
     }
   }
-  // return create(domTree, 'root')
-  console.log(create(domTree, '.root'))
   return create(domTree, '.root')
 }
