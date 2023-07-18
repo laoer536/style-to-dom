@@ -71,7 +71,6 @@ export function getSelectorListFromCssTree(cssTree: AtrulePrelude) {
     }
     allLineArr.push(singleLineArr)
   }
-  console.log('allLineArr', allLineArr)
   return allLineArr
 }
 
