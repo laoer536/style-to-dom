@@ -4,8 +4,11 @@ import { readFileSync } from 'node:fs'
 import * as csstree from 'css-tree'
 import type { ParseOptions } from 'css-tree'
 import type { AtrulePrelude } from 'css-tree'
-import { AtrulePlain, AtrulePreludePlain, ClassSelector, TypeSelector } from 'css-tree'
-import { isPackageExists } from 'local-pkg'
+import { AtrulePlain, AtrulePreludePlain, ClassSelector, string, TypeSelector } from 'css-tree'
+import { getPackageInfo, isPackageExists } from 'local-pkg'
+import { templates } from './templates'
+
+export type StyleType = 'css' | 'less' | 'scss'
 
 export function getStyleFileType(fileName: string) {
   const nameArr = fileName.split('.')
@@ -89,12 +92,12 @@ export function getDomTree(selectorList: string[][]) {
   return result
 }
 
-export function getDomStr(domTree: ReturnType<typeof getDomTree>, domType: 'vue' | 'react' = 'react') {
+export function getDomStr(domTree: ReturnType<typeof getDomTree>, domType: 'vue' | 'react') {
   const classAttribute = domType === 'vue' ? 'class' : 'className'
   const getSelectorName = (selector: string) => {
     return domType === 'vue'
       ? selector.startsWith('.')
-        ? selector.slice(1)
+        ? `"${selector.slice(1)}"`
         : ''
       : selector.startsWith('.')
       ? `{Style['${selector.slice(1)}']}`
@@ -146,6 +149,37 @@ export function getTheFileSuffix() {
     } else {
       return 'jsx'
     }
+  } else {
+    throw 'Currently only VUE and React are supported.'
+  }
+}
+
+export async function getTypeCode(
+  domStr: string,
+  styleType: StyleType,
+  componentName: string,
+  fileSuffix: ReturnType<typeof getTheFileSuffix>,
+  stylePath: string
+) {
+  const codeAfterInjectingKeyInformation = (templateCode: string) =>
+    templateCode
+      .replace('{componentName}', componentName)
+      .replace('{domStr}', domStr)
+      .replace('{stylePath}', stylePath)
+      .replace('{styleType}', styleType)
+
+  const { isTs } = isInfo()
+  if (fileSuffix === 'vue') {
+    const result = await getPackageInfo('vue')
+    if (!result) throw 'vue not install.'
+    const vueVersion = result.version.startsWith('2.') ? 'vue2' : 'vue3'
+    if (isTs) {
+      return codeAfterInjectingKeyInformation(templates[vueVersion === 'vue3' ? 'vue3TsCode' : 'vue3JsCode'])
+    } else {
+      return codeAfterInjectingKeyInformation(templates['vue2JsCode'])
+    }
+  } else if (['jsx', 'tsx'].includes(fileSuffix)) {
+    return codeAfterInjectingKeyInformation(templates['reactCode'])
   } else {
     throw 'Currently only VUE and React are supported.'
   }

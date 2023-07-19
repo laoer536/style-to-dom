@@ -1,14 +1,53 @@
-type StyleType = 'css' | 'less' | 'scss'
+const vue2JsCode = `<template>
+  {domStr}
+</template>
 
-const vue2JsCode = (domStr: string, styleType: StyleType) => {
-  return ''
+<script>
+export default {
+  name:{componentName}
+  data(){
+     return{
+          
+    }
+  }
+};
+</script>
+
+<style lang="{styleType}" scoped>
+"@import '{stylePath}'"
+</style>
+`
+
+const vue3JsCode = `<template>
+   {domStr}
+</template>
+
+<script setup>
+
+</script>
+
+<style scoped lang="{styleType}">
+"@import '{stylePath}'"
+</style>`
+
+const vue3TsCode = `<template>
+   {domStr}
+</template>
+
+<script setup lang="ts">
+
+</script>
+
+<style scoped lang="{styleType}">
+"@import '{stylePath}'"
+</style>`
+
+const reactCode = `
+import React from 'react'
+import Style from '{stylePath}'
+export default function {componentName}() {
+  return  {domStr}
 }
-const vue3TsCode = (domStr: string, styleType: StyleType) => {
-  return ''
-}
-const reactJsCode = (domStr: string, styleType: StyleType) => {
-  return ''
-}
-const reactTsCode = (domStr: string, styleType: StyleType) => {
-  return ''
-}
+`
+
+export const templates = { vue2JsCode, vue3TsCode, vue3JsCode, reactCode }
