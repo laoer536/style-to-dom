@@ -4,7 +4,8 @@ import { readFileSync } from 'node:fs'
 import * as csstree from 'css-tree'
 import type { ParseOptions } from 'css-tree'
 import type { AtrulePrelude } from 'css-tree'
-import { AtrulePlain, AtrulePreludePlain, ClassSelector, string, TypeSelector } from 'css-tree'
+import { AtrulePlain, AtrulePreludePlain, ClassSelector, TypeSelector } from 'css-tree'
+import { isPackageExists } from 'local-pkg'
 
 export function getStyleFileType(fileName: string) {
   const nameArr = fileName.split('.')
@@ -126,4 +127,26 @@ export function getDomStr(domTree: ReturnType<typeof getDomTree>, domType: 'vue'
     }
   }
   return create(domTree, '.root')
+}
+
+export function isInfo() {
+  const isTs = isPackageExists('typescript')
+  const isVue = isPackageExists('vue')
+  const isReact = isPackageExists('react')
+  return { isTs, isReact, isVue }
+}
+
+export function getTheFileSuffix() {
+  const { isVue, isReact, isTs } = isInfo()
+  if (isVue) {
+    return 'vue'
+  } else if (isReact) {
+    if (isTs) {
+      return 'tsx'
+    } else {
+      return 'jsx'
+    }
+  } else {
+    throw 'Currently only VUE and React are supported.'
+  }
 }
