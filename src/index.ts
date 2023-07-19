@@ -14,7 +14,7 @@ import {
 import minimist from 'minimist'
 
 const [userStyleCodePath] = minimist(process.argv.slice(2))._
-const { isTs, isVue, isReact } = isInfo()
+const { isVue, isReact } = isInfo()
 
 if (!isReact && !isVue) {
   throw 'Currently only VUE and React are supported.'
