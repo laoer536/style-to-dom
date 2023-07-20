@@ -3,7 +3,6 @@ import { writeFileSync } from 'node:fs'
 import { relative, join } from 'pathe'
 import {
   readFileCode,
-  getLessCssCode,
   getDomTree,
   getCssTree,
   getSelectorListFromCssTree,
@@ -11,8 +10,10 @@ import {
   isInfo,
   getTheFileSuffix,
   getTypeCode,
-  StyleType,
+  getStyleFileType,
+  getCssCode,
 } from './utils'
+import type { StyleType } from './utils'
 import minimist from 'minimist'
 
 const [userStyleCodePath] = minimist(process.argv.slice(2))._
@@ -25,13 +26,11 @@ if (!isReact && !isVue) {
 async function run() {
   const userStyleCodePathReal = join(cwd(), userStyleCodePath)
   const userStyleFileName = userStyleCodePathReal.split('/').pop() || ''
-  const userStyleType = userStyleFileName.split('.').pop() || ''
-  if (!['less', 'css', 'scss'].includes(userStyleType))
-    throw 'For the time being, only less, scss, css files are supported'
+  const userStyleType = getStyleFileType(userStyleFileName)
   const componentName = userStyleFileName.split('.')[0]
   const userStyleCodeDirPath = join(userStyleCodePathReal, '..')
-  const lessCode = readFileCode(userStyleCodePathReal)
-  const cssCode = await getLessCssCode(lessCode)
+  const styleCode = readFileCode(userStyleCodePathReal)
+  const cssCode = await getCssCode(styleCode, userStyleType)
   const cssTree = getCssTree(cssCode)
   const selectorList = getSelectorListFromCssTree(cssTree)
   const domTree = getDomTree(selectorList)

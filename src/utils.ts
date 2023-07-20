@@ -14,7 +14,7 @@ export function getStyleFileType(fileName: string) {
   const nameArr = fileName.split('.')
   const suffix = nameArr.pop()
   if (suffix && ['css', 'less', 'scss'].includes(suffix)) {
-    return suffix
+    return suffix as StyleType
   } else {
     throw `File type must be css,less,or scss.`
   }
@@ -33,7 +33,17 @@ export function getLessCssCode(lessCode: string): Promise<string> {
 }
 
 export function getScssCssCode(scssCode: string) {
-  return sass.compileString(scssCode)
+  return sass.compileString(scssCode).css
+}
+
+export async function getCssCode(styleCode: string, styleType: StyleType) {
+  if (styleType === 'less') {
+    return await getLessCssCode(styleCode)
+  } else if (styleType === 'scss') {
+    return getScssCssCode(styleCode)
+  } else {
+    return styleCode
+  }
 }
 
 export function readFileCode(filePath: string) {
