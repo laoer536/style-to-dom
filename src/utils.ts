@@ -184,9 +184,9 @@ export async function getTypeCode(
     if (!result) throw 'vue not install.'
     const vueVersion = result.version.startsWith('2.') ? 'vue2' : 'vue3'
     if (isTs) {
-      return codeAfterInjectingKeyInformation(templates[vueVersion === 'vue3' ? 'vue3TsCode' : 'vue3JsCode'])
+      return codeAfterInjectingKeyInformation(templates['vue3TsCode'])
     } else {
-      return codeAfterInjectingKeyInformation(templates['vue2JsCode'])
+      return codeAfterInjectingKeyInformation(templates[vueVersion === 'vue3' ? 'vue3JsCode' : 'vue2JsCode'])
     }
   } else if (['jsx', 'tsx'].includes(fileSuffix)) {
     return codeAfterInjectingKeyInformation(templates['reactCode'])
