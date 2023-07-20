@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jiti src/index.ts"
+    "test": "jiti src/index.ts",
+    "build": "unbuild",
+    "release": "pnpm build && changelogen --release && npm publish && git push --follow-tags"
   },
   "keywords": [],
   "author": "",
@@ -14,6 +16,7 @@
     "@types/less": "^3.0.3",
     "@types/minimist": "^1.2.2",
     "@types/node": "^20.3.3",
+    "changelogen": "^0.5.4",
     "css-tree": "^2.3.1",
     "eslint": "^8.44.0",
     "eslint-config-code-style-lint-ts": "^3.0.6",
