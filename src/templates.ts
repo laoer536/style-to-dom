@@ -4,7 +4,7 @@ const vue2JsCode = `<template>
 
 <script>
 export default {
-  name:{componentName}
+  name:{componentName},
   data(){
      return{
           
@@ -14,7 +14,7 @@ export default {
 </script>
 
 <style lang="{styleType}" scoped>
-"@import '{stylePath}'"
+@import '{stylePath}'
 </style>
 `
 
