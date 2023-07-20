@@ -119,7 +119,7 @@ export function getDomStr(domTree: ReturnType<typeof getDomTree>, domType: 'vue'
     const domName = getDomName(selector)
     const selectorName = getSelectorName(selector.includes('.self') ? '.' + selector.split('.')[1] : selector)
     if (keys.length === 0) {
-      return `<${domName} ${classAttribute}=${selectorName || `'${domName}'`}>##</${domName}>`
+      return `<${domName} ${classAttribute}=${selectorName || `'${domName}'`}></${domName}>`
     } else {
       let result = `<${domName} ${classAttribute}=${selectorName || `'${domName}'`}>`
       for (const selector of keys) {
