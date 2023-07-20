@@ -1,10 +1,10 @@
 import less from 'less'
-import sass from 'sass'
+import { compileString } from 'sass'
 import { readFileSync } from 'node:fs'
 import * as csstree from 'css-tree'
 import type { ParseOptions } from 'css-tree'
 import type { AtrulePrelude } from 'css-tree'
-import { AtrulePlain, AtrulePreludePlain, ClassSelector, string, TypeSelector } from 'css-tree'
+import { AtrulePlain, AtrulePreludePlain, ClassSelector, TypeSelector } from 'css-tree'
 import { getPackageInfo, isPackageExists } from 'local-pkg'
 import { templates } from './templates'
 
@@ -33,7 +33,7 @@ export function getLessCssCode(lessCode: string): Promise<string> {
 }
 
 export function getScssCssCode(scssCode: string) {
-  return sass.compileString(scssCode).css
+  return compileString(scssCode).css
 }
 
 export async function getCssCode(styleCode: string, styleType: StyleType) {
