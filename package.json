@@ -10,7 +10,7 @@
     "release": "pnpm build && changelogen --release && npm publish && git push --follow-tags"
   },
   "bin": {
-    "create-dom": "./dist/index.mjs"
+    "create-style-dom": "./dist/index.mjs"
   },
   "keywords": [],
   "author": "",
