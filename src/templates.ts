@@ -27,7 +27,7 @@ const vue3JsCode = `<template>
 </script>
 
 <style scoped lang="{styleType}">
-"@import '{stylePath}'"
+@import '{stylePath}'
 </style>`
 
 const vue3TsCode = `<template>
@@ -39,7 +39,7 @@ const vue3TsCode = `<template>
 </script>
 
 <style scoped lang="{styleType}">
-"@import '{stylePath}'"
+@import '{stylePath}'
 </style>`
 
 const reactCode = `
