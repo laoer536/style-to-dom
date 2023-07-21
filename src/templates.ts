@@ -4,7 +4,7 @@ const vue2JsCode = `<template>
 
 <script>
 export default {
-  name:{componentName},
+  name:'{componentName}',
   data(){
      return{
           
