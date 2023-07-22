@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.1.1
+
+[compare changes](https://undefined/undefined/compare/v1.1.0...v1.1.1)
+
+### 🔥 Performance
+
+- SelfClosingTags (121262d)
+
+### 🩹 Fixes
+
+- Templates.ts (7d364d9)
+
+### ❤️  Contributors
+
+- LJie <1547698569@qq.com>
+
 ## v1.1.0
 
 
