@@ -3,6 +3,7 @@
 import { cwd } from 'node:process'
 import { writeFileSync } from 'node:fs'
 import { relative, join } from 'pathe'
+import { white, bgRed, green, bgYellow } from 'kolorist'
 import {
   readFileCode,
   getDomTree,
@@ -23,7 +24,9 @@ const { isVue, isReact } = isInfo()
 
 if (!isReact && !isVue) {
   console.warn(
-    'After judgment, if Vue or React is not installed in your project, an HTML file will be automatically created for you.'
+    bgYellow(
+      '👉 After judgment, if Vue or React is not installed in your project, an HTML file will be automatically created for you.'
+    )
   )
 }
 
@@ -55,8 +58,8 @@ async function run() {
 
 run()
   .then(() => {
-    console.log('sucess')
+    console.log(green(`🌈 sucess`))
   })
   .catch((err) => {
-    console.error(err)
+    console.error(bgRed(white(`🥹 ${err}`)))
   })

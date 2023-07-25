@@ -1,6 +1,7 @@
 import less from 'less'
 import { compileString } from 'sass'
 import { readFileSync } from 'node:fs'
+import { white, bgRed } from 'kolorist'
 import * as csstree from 'css-tree'
 import type { ParseOptions } from 'css-tree'
 import type { AtrulePrelude } from 'css-tree'
@@ -17,7 +18,7 @@ export function getStyleFileType(fileName: string) {
   if (suffix && ['css', 'less', 'scss'].includes(suffix)) {
     return suffix as StyleType
   } else {
-    throw `File type must be css,less,or scss.`
+    throw bgRed(white(`🧐 File type must be css,less,or scss.`))
   }
 }
 
