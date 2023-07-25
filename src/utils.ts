@@ -103,10 +103,10 @@ export function getDomTree(selectorList: string[][]) {
   return result
 }
 
-export function getDomStr(domTree: ReturnType<typeof getDomTree>, domType: 'vue' | 'react') {
-  const classAttribute = domType === 'vue' ? 'class' : 'className'
+export function getDomStr(domTree: ReturnType<typeof getDomTree>, domType: 'vue' | 'react' | 'html') {
+  const classAttribute = ['vue', 'html'].includes(domType) ? 'class' : 'className'
   const getSelectorName = (selector: string) => {
-    return domType === 'vue'
+    return ['vue', 'html'].includes(domType)
       ? selector.startsWith('.')
         ? `"${selector.slice(1)}"`
         : ''
@@ -163,7 +163,7 @@ export function getTheFileSuffix() {
       return 'jsx'
     }
   } else {
-    throw 'Currently only VUE and React are supported.'
+    return 'html'
   }
 }
 
@@ -194,6 +194,6 @@ export async function getTypeCode(
   } else if (['jsx', 'tsx'].includes(fileSuffix)) {
     return codeAfterInjectingKeyInformation(templates['reactCode'])
   } else {
-    throw 'Currently only VUE and React are supported.'
+    return codeAfterInjectingKeyInformation(templates['htmlCode'])
   }
 }

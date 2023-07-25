@@ -22,7 +22,9 @@ const [userStyleCodePath] = minimist(process.argv.slice(2))._
 const { isVue, isReact } = isInfo()
 
 if (!isReact && !isVue) {
-  throw 'Currently only VUE and React are supported.'
+  console.warn(
+    'After judgment, if Vue or React is not installed in your project, an HTML file will be automatically created for you.'
+  )
 }
 
 async function run() {
@@ -37,7 +39,10 @@ async function run() {
   const selectorList = getSelectorListFromCssTree(cssTree)
   const domTree = getDomTree(selectorList)
   const fileSuffix = getTheFileSuffix()
-  const domStr = getDomStr(domTree, fileSuffix === 'vue' ? 'vue' : 'react')
+  if (fileSuffix === 'html' && userStyleType !== 'css') {
+    throw `HTML files only support importing CSS files, but your file type is ${userStyleType}.`
+  }
+  const domStr = getDomStr(domTree, ['tsx', 'jsx'].includes(fileSuffix) ? 'react' : (fileSuffix as 'vue' | 'html'))
   const code = await getTypeCode(
     domStr,
     userStyleType as StyleType,
@@ -48,6 +53,10 @@ async function run() {
   writeFileSync(join(userStyleCodeDirPath, `${componentName}.${fileSuffix}`), code, 'utf-8')
 }
 
-run().then(() => {
-  console.log('sucess')
-})
+run()
+  .then(() => {
+    console.log('sucess')
+  })
+  .catch((err) => {
+    console.error(err)
+  })

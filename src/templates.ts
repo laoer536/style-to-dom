@@ -50,4 +50,16 @@ export default function {componentName}() {
 }
 `
 
-export const templates = { vue2JsCode, vue3TsCode, vue3JsCode, reactCode }
+const htmlCode = `<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="{stylePath}"/>
+    <title>{componentName}</title>
+  </head>
+  <body></body>
+</html>
+`
+
+export const templates = { vue2JsCode, vue3TsCode, vue3JsCode, reactCode, htmlCode }
