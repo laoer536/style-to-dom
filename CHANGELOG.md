@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v1.2.0
+
+[compare changes](https://undefined/undefined/compare/v1.1.1...v1.2.0)
+
+### 🚀 Enhancements
+
+- Generate HTML files for projects that are not Vue and React. (77bd9e9)
+
+### 🔥 Performance
+
+- Err tip (f59122f)
+
+### ❤️  Contributors
+
+- LJie <1547698569@qq.com>
+
 ## v1.1.1
 
 [compare changes](https://undefined/undefined/compare/v1.1.0...v1.1.1)
