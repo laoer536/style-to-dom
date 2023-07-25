@@ -1,8 +1,9 @@
 {
   "name": "style-to-dom",
   "version": "1.2.2",
-  "description": "",
-  "main": "index.js",
+  "description": "Fast create dom file by less or scss or css file.",
+  "author": "laoer536 <1547698569@qq.com>",
+  "repository": "git@github.com:laoer536/style-to-dom.git",
   "scripts": {
     "test": "jiti src/index.ts ./test/less/react/index.module.less",
     "test:build": "node dist/index.mjs ./test/less/react/index.module.less",
@@ -12,8 +13,13 @@
   "bin": {
     "create-style-dom": "./dist/index.mjs"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "style-to-dom",
+    "style2dom",
+    "create-style-dom",
+    "fast-style-dom",
+    "create-styled-dom"
+  ],
   "license": "ISC",
   "files": [
     "dist"
