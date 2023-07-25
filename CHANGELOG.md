@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.2
+
+[compare changes](https://undefined/undefined/compare/v1.2.1...v1.2.2)
+
+### 🔥 Performance
+
+- For type info color (569400c)
+
+### ❤️  Contributors
+
+- Laoer536 <1547698569@qq.com>
+
 ## v1.2.1
 
 [compare changes](https://undefined/undefined/compare/v1.2.0...v1.2.1)
