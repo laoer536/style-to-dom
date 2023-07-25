@@ -7,7 +7,7 @@
   "scripts": {
     "test": "jiti src/index.ts ./test/less/react/index.module.less",
     "test:build": "node dist/index.mjs ./test/less/react/index.module.less",
-    "build": "unbuild",
+    "build": "unbuild  && jiti scripts/add-node-env.ts",
     "release": "pnpm build && changelogen --release && npm publish && git push --follow-tags"
   },
   "bin": {
