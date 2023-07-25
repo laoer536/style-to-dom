@@ -62,7 +62,7 @@ For the case where the class is labeled at this level, you need to write it as f
       }
     }
     h2 {
-      //&.self-sub-title {
+      //&.sub-title {
       //  font-size: 14px;
       //  .sss {
       //    font-size: 57px;
