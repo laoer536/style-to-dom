@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.3
+
+[compare changes](https://undefined/undefined/compare/v1.2.2...v1.2.3)
+
+### 📖 Documentation
+
+- Info update (396e74f)
+
+### ❤️  Contributors
+
+- Laoer536 <1547698569@qq.com>
+
 ## v1.2.2
 
 [compare changes](https://undefined/undefined/compare/v1.2.1...v1.2.2)
