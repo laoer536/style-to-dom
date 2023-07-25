@@ -31,6 +31,10 @@ async function run() {
   const userStyleCodePathReal = join(cwd(), userStyleCodePath)
   const userStyleFileName = userStyleCodePathReal.split('/').pop() || ''
   const userStyleType = getStyleFileType(userStyleFileName)
+  const fileSuffix = getTheFileSuffix()
+  if (fileSuffix === 'html' && userStyleType !== 'css') {
+    throw `Generation failed! HTML files only support importing CSS files, but your file type is ${userStyleType}.`
+  }
   const componentName = userStyleFileName.split('.')[0]
   const userStyleCodeDirPath = join(userStyleCodePathReal, '..')
   const styleCode = readFileCode(userStyleCodePathReal)
@@ -38,10 +42,6 @@ async function run() {
   const cssTree = getCssTree(cssCode)
   const selectorList = getSelectorListFromCssTree(cssTree)
   const domTree = getDomTree(selectorList)
-  const fileSuffix = getTheFileSuffix()
-  if (fileSuffix === 'html' && userStyleType !== 'css') {
-    throw `HTML files only support importing CSS files, but your file type is ${userStyleType}.`
-  }
   const domStr = getDomStr(domTree, ['tsx', 'jsx'].includes(fileSuffix) ? 'react' : (fileSuffix as 'vue' | 'html'))
   const code = await getTypeCode(
     domStr,
