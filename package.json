@@ -31,7 +31,8 @@
     "local-pkg": "^0.4.3",
     "minimist": "^1.2.8",
     "pathe": "^1.1.1",
-    "sass": "^1.63.6"
+    "sass": "^1.63.6",
+    "prettier": "^2.8.8"
   },
   "devDependencies": {
     "@types/css-tree": "^2.3.1",
@@ -44,7 +45,6 @@
     "eslint-config-code-style-lint-ts": "^3.0.6",
     "jiti": "^1.18.2",
     "kolorist": "^1.8.0",
-    "prettier": "^2.8.8",
     "typescript": "^5.1.6",
     "unbuild": "^1.2.1"
   }
