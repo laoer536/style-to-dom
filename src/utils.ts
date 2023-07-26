@@ -1,4 +1,5 @@
 import less from 'less'
+import prettier from 'prettier'
 import { compileString } from 'sass'
 import { readFileSync } from 'node:fs'
 import { white, bgRed } from 'kolorist'
@@ -7,8 +8,11 @@ import type { ParseOptions } from 'css-tree'
 import type { AtrulePrelude } from 'css-tree'
 import { AtrulePlain, AtrulePreludePlain, ClassSelector, TypeSelector } from 'css-tree'
 import { getPackageInfo, isPackageExists } from 'local-pkg'
+import type { Options } from 'prettier'
 import { templates } from './templates'
 import { selfClosingTags } from './data'
+
+const { resolveConfig, format } = prettier
 
 export type StyleType = 'css' | 'less' | 'scss'
 
@@ -165,6 +169,15 @@ export function getTheFileSuffix() {
     }
   } else {
     return 'html'
+  }
+}
+
+export async function getFormatCode(code: string, prettierConfig: Options) {
+  if (prettierConfig) {
+    return format(code, prettierConfig)
+  } else {
+    const options = (await resolveConfig('')) || {}
+    return format(code, Object.assign(prettierConfig, options))
   }
 }
 

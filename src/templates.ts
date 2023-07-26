@@ -58,7 +58,9 @@ const htmlCode = `<!DOCTYPE html>
     <link rel="stylesheet" type="text/css" href="{stylePath}"/>
     <title>{componentName}</title>
   </head>
-  <body></body>
+  <body>
+  {domStr}
+</body>
 </html>
 `
 
