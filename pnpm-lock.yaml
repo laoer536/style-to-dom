@@ -37,6 +37,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.3.3
     version: 20.3.3
+  '@types/prettier':
+    specifier: ^2.7.3
+    version: 2.7.3
   changelogen:
     specifier: ^0.5.4
     version: 0.5.4
@@ -896,6 +899,10 @@ packages:
 
   /@types/node@20.3.3:
     resolution: {integrity: sha512-wheIYdr4NYML61AjC8MKj/2jrR/kDQri/CIpVoZwldwhnIrD/j9jIU5bJ8yBKuB2VhpFV7Ab6G2XkBjv9r9Zzw==}
+    dev: true
+
+  /@types/prettier@2.7.3:
+    resolution: {integrity: sha512-+68kP9yzs4LMp7VNh8gdzMSPZFL44MLGqiHWvttYJe+6qnuVr4Ek9wSBQoveqY/r+LwjCcU29kNVkidwim+kYA==}
     dev: true
 
   /@types/resolve@1.20.2:

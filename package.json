@@ -6,6 +6,7 @@
   "repository": "git@github.com:laoer536/style-to-dom.git",
   "scripts": {
     "test": "jiti src/index.ts ./test/less/react/index.module.less",
+    "test:html": "jiti src/index.ts ./test/less/react/test.css",
     "test:build": "node dist/index.mjs ./test/less/react/index.module.less",
     "build": "unbuild  && jiti scripts/add-node-env.ts",
     "release": "pnpm build && changelogen --release && npm publish && git push --follow-tags"
@@ -37,6 +38,7 @@
     "@types/less": "^3.0.3",
     "@types/minimist": "^1.2.2",
     "@types/node": "^20.3.3",
+    "@types/prettier": "^2.7.3",
     "changelogen": "^0.5.4",
     "eslint": "^8.44.0",
     "eslint-config-code-style-lint-ts": "^3.0.6",

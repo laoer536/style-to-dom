@@ -1,0 +1,44 @@
+/* HTML元素选择器 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+}
+
+h1 {
+    color: #333;
+}
+
+p {
+    color: #666;
+}
+
+/* 类选择器 */
+.container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ID选择器 */
+#header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+}
+
+/* 子选择器 */
+ul > li {
+    margin-bottom: 10px;
+}
+
+/* 伪类选择器 */
+a:hover {
+    color: #ff0000;
+}
+
+/* 媒体查询 */
+@media screen and (max-width: 600px) {
+    body {
+        font-size: 14px;
+    }
+}

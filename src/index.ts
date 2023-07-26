@@ -13,9 +13,11 @@ import {
   getTypeCode,
   getStyleFileType,
   getCssCode,
+  getFormatCode,
 } from './utils'
 import type { StyleType } from './utils'
 import minimist from 'minimist'
+import { Parser } from './data'
 
 const [userStyleCodePath] = minimist(process.argv.slice(2))._
 const { isVue, isReact } = isInfo()
@@ -51,7 +53,11 @@ async function run() {
     fileSuffix,
     './' + relative(userStyleCodeDirPath, userStyleCodePathReal)
   )
-  writeFileSync(join(userStyleCodeDirPath, `${componentName}.${fileSuffix}`), code, 'utf-8')
+  writeFileSync(
+    join(userStyleCodeDirPath, `${componentName}.${fileSuffix}`),
+    await getFormatCode(code, { parser: Parser[fileSuffix] }),
+    'utf-8'
+  )
 }
 
 run()

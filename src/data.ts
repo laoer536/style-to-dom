@@ -14,3 +14,10 @@ export const selfClosingTags = [
   'track',
   'wbr',
 ]
+
+export enum Parser {
+  tsx = 'babel-ts',
+  jsx = 'babel',
+  vue = 'vue',
+  html = 'html',
+}
