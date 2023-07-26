@@ -1,6 +1,34 @@
 # Changelog
 
 
+## v1.2.4
+
+[compare changes](https://undefined/undefined/compare/v1.2.3...v1.2.4)
+
+### 🔥 Performance
+
+- Help generate formatted code (1548374)
+- Help generate formatted code (190dc4a)
+
+### 🩹 Fixes
+
+- Build format err (f028f17)
+
+### 📖 Documentation
+
+- MD update. (ebbdfef)
+- MD update. (307c398)
+- README.md update (f4a379a)
+
+### 📦 Build
+
+- Add-node-env (e6f36d0)
+
+### ❤️  Contributors
+
+- Laoer536 <1547698569@qq.com>
+- LJie <1547698569@qq.com>
+
 ## v1.2.3
 
 [compare changes](https://undefined/undefined/compare/v1.2.2...v1.2.3)

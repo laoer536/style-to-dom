@@ -1,6 +1,6 @@
 {
   "name": "style-to-dom",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "Fast create dom file by less or scss or css file.",
   "author": "laoer536 <1547698569@qq.com>",
   "repository": "git@github.com:laoer536/style-to-dom.git",
