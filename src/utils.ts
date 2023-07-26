@@ -1,4 +1,5 @@
 import less from 'less'
+import prettier from 'prettier'
 import { compileString } from 'sass'
 import { readFileSync } from 'node:fs'
 import { white, bgRed } from 'kolorist'
@@ -8,9 +9,10 @@ import type { AtrulePrelude } from 'css-tree'
 import { AtrulePlain, AtrulePreludePlain, ClassSelector, TypeSelector } from 'css-tree'
 import { getPackageInfo, isPackageExists } from 'local-pkg'
 import type { Options } from 'prettier'
-import { resolveConfig, format } from 'prettier'
 import { templates } from './templates'
 import { selfClosingTags } from './data'
+
+const { resolveConfig, format } = prettier
 
 export type StyleType = 'css' | 'less' | 'scss'
 
