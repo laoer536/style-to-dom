@@ -82,3 +82,4 @@ For the case where the class is labeled at this level, you need to write it as f
 }
 ```
 
+Additionally, since class selectors only generate 'div' tags, if you want to specify which tags to generate, please use tag selectors when writing style selectors.
