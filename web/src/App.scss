@@ -1,3 +1,5 @@
+@use 'assets/_mixin' as mixin;
+
 #root {
   height: 100%;
   width: 100%;
@@ -12,14 +14,13 @@
     width: 60%;
     height: 70%;
     flex-shrink: 0;
-    border-radius: 21.44px;
-    background: rgba(217, 217, 217, 0.31);
-    backdrop-filter: blur(10px);
+
     position: absolute;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
     padding: 20px;
+    @include mixin.card(60%, 70%);
     .title {
       color: #fff;
       font-size: 29.829px;
@@ -38,10 +39,19 @@
       border: 1px solid white;
       outline-color: white;
       font-size: 16px;
+      border-radius: 10px;
+      resize: none;
+      font-weight: normal;
+      line-height: 1.5;
       @extend .title;
       &:hover {
         cursor: url('/cursor-text.svg'), text;
       }
     }
+  }
+
+  .result-card {
+    padding: 20px;
+    @include mixin.card(min-content);
   }
 }

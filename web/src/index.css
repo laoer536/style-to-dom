@@ -9,8 +9,5 @@ body {
 
 body {
   font-family: 'Inter Variable', sans-serif;
-}
-
-body:hover{
-  cursor: url("/cursor.svg"),auto;
+  cursor: url('/cursor.svg'), auto;
 }

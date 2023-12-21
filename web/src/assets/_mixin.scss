@@ -1,0 +1,7 @@
+@mixin card($width, $height: auto) {
+  width: $width;
+  height: $height;
+  border-radius: 21.44px;
+  background: rgba(217, 217, 217, 0.31);
+  backdrop-filter: blur(10px);
+}
