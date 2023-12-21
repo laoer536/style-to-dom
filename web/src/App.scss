@@ -10,7 +10,7 @@
 
   .input-card {
     width: 60%;
-    height: 60%;
+    height: 70%;
     flex-shrink: 0;
     border-radius: 21.44px;
     background: rgba(217, 217, 217, 0.31);
@@ -40,7 +40,7 @@
       font-size: 16px;
       @extend .title;
       &:hover {
-        cursor: url('/text.cur'), text;
+        cursor: url('/cursor-text.svg'), text;
       }
     }
   }
