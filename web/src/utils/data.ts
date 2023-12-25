@@ -42,19 +42,4 @@ export const defaultCode = `.input-card {
       line-height: normal;
       text-align: center;
     }
-    textarea {
-      width: 100%;
-      margin-top: 20px;
-      background: transparent;
-      text-align: left;
-      height: calc(100% - 76px);
-      padding: 10px 20px;
-      border: 1px solid white;
-      outline-color: white;
-      font-size: 16px;
-      @extend .title;
-      &:hover {
-        cursor: url('/cursor-text.svg'), text;
-      }
-    }
   }`

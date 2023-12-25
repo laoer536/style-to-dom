@@ -9,6 +9,7 @@
     "test:html": "jiti src/index.ts ./test/less/react/test.css",
     "test:build": "node dist/index.mjs ./test/less/react/test.css",
     "build": "unbuild  && jiti scripts/add-node-env.ts",
+    "dev:web": "cd web && pnpm dev",
     "release": "pnpm build && changelogen --release && npm publish && git push --follow-tags"
   },
   "bin": {

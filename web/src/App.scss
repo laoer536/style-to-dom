@@ -1,4 +1,4 @@
-@use 'assets/_mixin' as mixin;
+@use 'assets/_mixin';
 
 #root {
   height: 100%;
@@ -28,6 +28,7 @@
       font-weight: 600;
       line-height: normal;
       text-align: center;
+      user-select: none;
     }
     textarea {
       width: 100%;
@@ -46,6 +47,12 @@
       @extend .title;
       &:hover {
         cursor: url('/cursor-text.svg'), text;
+      }
+      &::selection{
+        background-color: rgba(217, 217, 217, 0.5);
+      }
+      &::-webkit-scrollbar{
+        display: none;
       }
     }
   }
