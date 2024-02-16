@@ -82,4 +82,52 @@ For the case where the class is labeled at this level, you need to write it as f
 }
 ```
 
+If in `vue3-ts` project, will create a `vue` file
+
+```vue
+<template>
+  <div class="root">
+    <div class="home">
+      <div class="title">
+        <img class="img" />
+        <h2 class="self-sub-title"><div class="sss"></div></h2>
+      </div>
+      <div class="title"></div>
+      <input class="input" />
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts"></script>
+
+<style scoped lang="scss">
+  @import './index.scss';
+</style>
+```
+
+If in `react-ts` project, will create a `tsx` file
+
+```tsx
+import React from "react";
+import Style from "./index.module.scss";
+export default function index() {
+  return (
+    <div className={Style["root"]}>
+      <div className={Style["home"]}>
+        <div className={Style["title"]}>
+          <img className="img" />
+          <h2 className={Style["self-sub-title"]}>
+            <div className={Style["sss"]}></div>
+          </h2>
+        </div>
+        <div className={Style["title"]}></div>
+        <input className="input" />
+      </div>
+    </div>
+  );
+}
+```
+
+> react-js | vue2-js | vue3-js are also supported, so I won't give an example here.
+
 Additionally, since class selectors only generate 'div' tags, if you want to specify which tags to generate, please use tag selectors when writing style selectors.
