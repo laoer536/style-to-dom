@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { ChangeEventHandler, useState } from 'react'
 import './App.scss'
 import { MdEditor } from 'md-editor-rt'
 import 'md-editor-rt/lib/style.css'
@@ -6,10 +6,13 @@ import { defaultCode } from './utils/data.ts'
 
 function InputCard() {
   const [textareaCode, setTextareaCode] = useState(defaultCode)
+  const change: ChangeEventHandler<HTMLTextAreaElement> = (v) => {
+    setTextareaCode(v.target.value)
+  }
   return (
     <div className={'input-card'}>
       <div className={'title'}>Please enter your style code</div>
-      <textarea value={textareaCode} spellCheck={false} autoFocus={true} />
+      <textarea value={textareaCode} spellCheck={false} autoFocus={true} onChange={change} />
     </div>
   )
 }
