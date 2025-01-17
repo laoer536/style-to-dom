@@ -1,6 +1,9 @@
 # style-to-dom
 Fast create dom file by less or scss or css file.
 
+## sponsor
+[<img src="https://api.gitsponsors.com/api/badge/img?id=660767296" height="30">](https://api.gitsponsors.com/api/badge/link?p=VrVlCjVTScheaCH16aely0PqDuEtfR2/tmMl+MwvIx9OF6R7SVtVbtdf8vMuc+haGiWP2ZJV2H11AVJv8BKlCDeUOQic7hsDoEzXLjNRI8VaLWcOHeR3uY/1X79ds7WYD33VH0YUXw52HopkpNL41g==)
+
 ## Install
 
 npm
